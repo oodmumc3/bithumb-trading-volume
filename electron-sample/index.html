@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>실시간 처리금액 계산기</title>
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css" />
+
+  <script type="text/javascript">
+      window.$ = window.jquery = require("jquery");
+      window.popper = require("popper.js");
+      require("bootstrap");
+      const moment = require('moment');
+      require('pc-bootstrap4-datetimepicker');
+      const Queue = require('better-queue');
+
+      $(function () {
+          RealtimeAggregation.init();
+      });
+  </script>
+  <script type="text/javascript" src="js/realtimeAggregation.js"></script>
+</head>
+<body>
+<div class="jumbotron container">
+  <h1 class="display-4">실시간 체결금액 계산기</h1>
+  <form>
+    <div class="alert alert-dark" role="alert" id="alertDiv" style="display: none;"> </div>
+    <div class="form-group row">
+      <div class="col-6">
+        <label for="maxTradeCount">체결금액 한계 수치</label>
+        <input type="number" class="form-control" id="maxTradeCount" aria-describedby="emailHelp">
+        <small id="maxTradeCountHelp" class="form-text text-muted">최대 한도의 체결금액 수치를 입력해주세요.</small>
+      </div>
+      <div class="col-6">
+        <label for="startDateTime">실시간 수집 날짜 및 시간</label>
+        <input type="text" class="form-control" id="startDateTime">
+        <small id="startDateTimeHelp" class="form-text text-muted">수집을 시작할 날짜 및 시간을 선택해주세요.</small>
+      </div>
+    </div>
+    <button id="startBtn" type="button" class="btn btn-primary">시작</button>
+  </form>
+
+  <div id="aggregationDiv">
+    <hr class="my-4">
+    <div class="row text-center">
+      <div class="col">
+        <div class="counter">
+          <i class="fa fa-bitcoin fa-2x"></i>
+          <h1 class="timer count-title count-number" id="totalTradeCount">대기중...</h1>
+          <p class="count-text">총 체결금액</p>
+        </div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
