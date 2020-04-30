@@ -25,7 +25,7 @@
     "better-queue": "^3.8.10",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "pc-bootstrap4-datetimepicker": "^4.17.50",
     "popper.js": "^1.14.3",
